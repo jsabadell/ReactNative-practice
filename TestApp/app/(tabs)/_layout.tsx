@@ -1,12 +1,32 @@
     import { Image, View, Text, ImageBackground } from 'react-native'
     import React from 'react'
-    import { HeaderShownContext, HeaderTitle } from '@react-navigation/elements'
     import { Tabs } from 'expo-router'
     import { images } from '@/constants/images'
     import { icons } from '@/constants/icons'
-    import play from '../../assets/icons/play.png';
 
 
+
+    function TabIcon({ focused, icon, title }: any) {
+  if (focused) {
+    return (
+      <ImageBackground
+        source={images.highlight}
+        className="flex flex-row w-full flex-1 min-w-[112px] min-h-14 mt-4 justify-center items-center rounded-full overflow-hidden"
+      >
+        <Image source={icon} tintColor="#151312" className="size-5" />
+        <Text className="text-secondary text-base font-semibold ml-2">
+          {title}
+        </Text>
+      </ImageBackground>
+    );
+  }
+
+  return (
+    <View className="size-full justify-center items-center mt-4 rounded-full">
+      <Image source={icon} tintColor="#A8B5DB" className="size-5" />
+    </View>
+  );
+}
 
     const _layout = () => {
     return (
@@ -17,17 +37,11 @@
                 title: 'Home',
                 headerShown: false,
                 tabBarIcon: ({ focused }) => (
-                    <>
-                        <ImageBackground
-                            source={images.highlight}
-                            className="flex flex-row w-full flex-1 min-1-[112px] min-h-14 mt-4 justify-center items-center rounded-full overflow-hidden"
-                            >
-                            <Image source={icons.home}
-                            tintColor="#151312" className="size-5"/>
-
-                            <Text>Home</Text>
-                        </ImageBackground>
-                    </>
+                    <TabIcon 
+                        focused={focused}
+                        icon={icons.home} 
+                        title="Home"
+                    />
                 )
             }}
             />
@@ -36,7 +50,14 @@
             name="search"
             options={{
                 title: 'Search',
-                headerShown: false
+                headerShown: false,
+                tabBarIcon: ({ focused }) => (
+                    <TabIcon 
+                        focused={focused}
+                        icon={icons.search} 
+                        title="Search"
+                    />
+                )
             }}
             />
 
@@ -44,7 +65,14 @@
             name="saved"
             options={{
                 title: 'Saved',
-                headerShown: false
+                headerShown: false,
+                tabBarIcon: ({ focused }) => (
+                    <TabIcon 
+                        focused={focused}
+                        icon={icons.save} 
+                        title="Saved"
+                    />
+                )
             }}
 
             />
@@ -52,7 +80,14 @@
             name="profile"
             options={{
                 title: 'Profile',
-                headerShown: false
+                headerShown: false,
+                tabBarIcon: ({ focused }) => (
+                    <TabIcon 
+                        focused={focused}
+                        icon={icons.person} 
+                        title="Profile"
+                    />
+                )
             }}
             />
         </Tabs>
